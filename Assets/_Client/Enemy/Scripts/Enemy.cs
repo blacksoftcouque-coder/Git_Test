@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour, IDamageable
 {
     // 데미지를 받을 수 있음.
@@ -16,8 +18,13 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField]
     private float moveSpeed = 3f;
 
+    // 공격을 시작하는 거리.
+    [SerializeField]
+    private float attackRange = 3f;
+
     private Player player = null;
     private AudioSource audioSource = null;
+    private NavMeshAgent agent = null;
 
     private Action<Enemy, int> OnEnemyDie = null;
 
@@ -25,6 +32,11 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         hp = maxHP;
         audioSource = GetComponent<AudioSource>();
+
+        // 기둥, 상자 같은 장애물을 피해서 이동하도록 NavMeshAgent 사용.
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = moveSpeed;
+        agent.stoppingDistance = attackRange * 0.9f;
     }
 
     public void Init(Player player, Action<Enemy, int> OnEnemyDie)
@@ -38,16 +50,17 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         while (true)
         {
-            // 플레이어를 위치 쫓아가는 로직.
-            Vector3 direction =  (player.Position - transform.position).normalized;
+            // 플레이어를 위치 쫓아가는 로직. (NavMesh 경로로 장애물을 돌아감)
             float distance = (player.Position - transform.position).magnitude;
 
-            if (distance >= 3f)
+            if (distance >= attackRange)
             {
-                transform.position += direction * moveSpeed * Time.deltaTime;
+                agent.isStopped = false;
+                agent.SetDestination(player.Position);
             }
             else
             {
+                agent.isStopped = true;
                 player.TakeDamage(10f);
                 yield return new WaitForSecondsRealtime(2f);
             }

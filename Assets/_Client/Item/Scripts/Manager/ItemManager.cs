@@ -26,6 +26,10 @@ public class ItemManager : MonoBehaviour
     [SerializeField]
     private float spawnHeight = 0.5f;
 
+    // 생성 위치에 다른 오브젝트가 있는지 검사할 반경. (spawnHeight보다 작아야 바닥에 걸리지 않음)
+    [SerializeField]
+    private float spawnCheckRadius = 0.4f;
+
     private List<Item> items = null;
 
     private void Awake()
@@ -68,12 +72,21 @@ public class ItemManager : MonoBehaviour
     private Vector3 GetRandomFloorPosition()
     {
         Bounds bounds = floorRenderer.bounds;
+        Vector3 position = Vector3.zero;
 
-        float x = Random.Range(bounds.min.x + edgePadding, bounds.max.x - edgePadding);
-        float z = Random.Range(bounds.min.z + edgePadding, bounds.max.z - edgePadding);
-        float y = bounds.max.y + spawnHeight;
+        // 기둥, 상자 같은 소품 안에 생성되지 않도록 빈 자리를 찾을 때까지 몇 번 다시 뽑음.
+        for (int i = 0; i < 10; i++)
+        {
+            float x = Random.Range(bounds.min.x + edgePadding, bounds.max.x - edgePadding);
+            float z = Random.Range(bounds.min.z + edgePadding, bounds.max.z - edgePadding);
+            float y = bounds.max.y + spawnHeight;
+            position = new Vector3(x, y, z);
 
-        return new Vector3(x, y, z);
+            if (!Physics.CheckSphere(position, spawnCheckRadius, ~0, QueryTriggerInteraction.Ignore))
+                break;
+        }
+
+        return position;
     }
 
     private void OnItemPicked(Item item)
