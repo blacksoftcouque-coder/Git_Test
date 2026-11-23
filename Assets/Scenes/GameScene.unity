@@ -1144,6 +1144,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1353641677}
+  - component: {fileID: 1353641678}
   m_Layer: 0
   m_Name: ItemManager
   m_TagString: Untagged
@@ -1163,10 +1164,28 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1702013856}
+  m_Children: []
   m_Father: {fileID: 1269217623}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1353641678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353641676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d281813edacd54eb91af5e55fed32c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemManager
+  itemPrefabs:
+  - {fileID: 3415806163270381109, guid: ba77d5e596e1e744c9616bbbeeaac1ac, type: 3}
+  floorRenderer: {fileID: 925617781}
+  maxItemCount: 3
+  spawnInterval: 5
+  edgePadding: 2
+  spawnHeight: 0.5
 --- !u!1 &1498778636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1312,11 +1331,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1583596082}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1702013856 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3968621044068772974, guid: ba77d5e596e1e744c9616bbbeeaac1ac, type: 3}
-  m_PrefabInstance: {fileID: 1961592111583734173}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1719019096 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5229990826449170128, guid: c0d17b3d86cf8564da2eaba54b4a3157, type: 3}
@@ -1476,63 +1490,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40889bbcd39a0ae4c80d7e68d23e4622, type: 3}
---- !u!1001 &1961592111583734173
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1353641677}
-    m_Modifications:
-    - target: {fileID: 3968621044068772974, guid: ba77d5e596e1e744c9616bbbeeaac1ac, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3968621044068772974, guid: ba77d5e596e1e744c9616bbbeeaac1ac, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3968621044068772974, guid: ba77d5e596e1e744c9616bbbeeaac1ac, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3968621044068772974, guid: ba77d5e596e1e744c9616bbbeeaac1ac, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3968621044068772974, guid: ba77d5e596e1e744c9616bbbeeaac1ac, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3968621044068772974, guid: ba77d5e596e1e744c9616bbbeeaac1ac, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3968621044068772974, guid: ba77d5e596e1e744c9616bbbeeaac1ac, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3968621044068772974, guid: ba77d5e596e1e744c9616bbbeeaac1ac, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3968621044068772974, guid: ba77d5e596e1e744c9616bbbeeaac1ac, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3968621044068772974, guid: ba77d5e596e1e744c9616bbbeeaac1ac, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8105805893078767335, guid: ba77d5e596e1e744c9616bbbeeaac1ac, type: 3}
-      propertyPath: m_Name
-      value: HealItem
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ba77d5e596e1e744c9616bbbeeaac1ac, type: 3}
 --- !u!1001 &2291581443922918227
 PrefabInstance:
   m_ObjectHideFlags: 0

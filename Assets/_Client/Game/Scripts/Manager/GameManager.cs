@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     // 게임 시작, 게임 클리어, 게임 종료 시 UI를 띄워주는 역할.
     private Player player = null;
     private EnemyManager enemyManager = null;
+    private ItemManager itemManager = null;
     private UIManager uiManager = null;
 
 
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
         score = 0;
         player = GetComponentInChildren<Player>();
         enemyManager = GetComponentInChildren<EnemyManager>();
+        itemManager = GetComponentInChildren<ItemManager>();
         uiManager = GetComponentInChildren<UIManager>();
     }
 
@@ -54,6 +56,7 @@ public class GameManager : MonoBehaviour
     {
         player.Init(OnGameOver);
         enemyManager.Init(player, AddScore);
+        itemManager.Init();
         uiManager.Init();
         uiManager.UpdateScoreUI(score);
     }
