@@ -18,7 +18,7 @@ public class Player : MonoBehaviour, IDamageable
     private float currentPitch = 0f;
 
 
-    // 마우스 왼쪽 버튼 → 오른손 총, 마우스 오른쪽 버튼 → 왼손 총.
+    // 마우스 왼쪽 버튼 → 왼손 총, 마우스 오른쪽 버튼 → 오른손 총.
     [SerializeField]
     private Gun rightGun = null;
 
@@ -65,16 +65,16 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Shoot()
     {
-        // 마우스 왼쪽 버튼: 오른손 총 발사.
+        // 마우스 왼쪽 버튼: 왼손 총 발사.
         if (Input.GetMouseButtonDown(0))
         {
-            rightGun?.Attack();
+            leftGun?.Attack();
         }
 
-        // 마우스 오른쪽 버튼: 왼손 총 발사.
+        // 마우스 오른쪽 버튼: 오른손 총 발사.
         if (Input.GetMouseButtonDown(1))
         {
-            leftGun?.Attack();
+            rightGun?.Attack();
         }
     }
 
